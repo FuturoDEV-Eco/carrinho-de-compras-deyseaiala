@@ -14,7 +14,7 @@ class ProdutoController extends Database{
                 `INSERT INTO produtos
                 (
                 nome,
-                amount,
+                quantidade,
                 cor,
                 voltagem,
                 descricao,
@@ -28,7 +28,7 @@ class ProdutoController extends Database{
                 $4,
                 $5,
                 $6
-                )`, [dados.nome, dados.amount, dados.cor, dados.voltagem, dados.descricao, dados.categoria_id]
+                )`, [dados.nome, dados.quantidade, dados.cor, dados.voltagem, dados.descricao, dados.categoria_id]
             )
 
             console.log(dados)
@@ -57,26 +57,6 @@ class ProdutoController extends Database{
         }
     }
 
-   /* async listarPorId(request, response){
-        try {
-                const id = request.params.id
-                
-                const produto = await this.database.query(
-                    `SELECT * FROM produtos WHERE id = $1`, [id]
-                )
-
-                if (produto.rows.length === 0) {
-                    return response.status(404).json({
-                        mensagem: 'Não foi encontrado um produto com esse id'
-                    })
-                }
-
-                response.json(servico.rows[0])
-
-        } catch {
-            response.status(500).json({ mensagem: 'Erro' })
-        }
-    }*/
 
         async listarPorId(request, response){
             try {
@@ -88,7 +68,7 @@ class ProdutoController extends Database{
                     WHERE p.id = $1`, [id])
     
                 if(produto.rows.legth === 0){
-                    return response.status(404).json({mensagem: "Não foi encontrado nenhum leitor"})
+                    return response.status(404).json({mensagem: "Não foi encontrado nenhum produto"})
                 }
     
                 response.status(200).json(produto.rows[0])    
