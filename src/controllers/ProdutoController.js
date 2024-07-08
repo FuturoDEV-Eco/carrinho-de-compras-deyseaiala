@@ -6,7 +6,7 @@ class ProdutoController extends Database{
         try {
             const dados = request.body
 
-            if(!dados.nome || !dados.categoria_id){
+            if(!dados.nome || !dados.categoria_id || !dados.preco){
                 return response.status(400).json({mensagem: "Nome do produto e id da categoria são obrigatórios. Por favor complete os dados."})
             }
 
@@ -18,7 +18,8 @@ class ProdutoController extends Database{
                 cor,
                 voltagem,
                 descricao,
-                categoria_id
+                categoria_id,
+                preco
                 )
                 values
                 (
@@ -27,8 +28,9 @@ class ProdutoController extends Database{
                 $3,
                 $4,
                 $5,
-                $6
-                )`, [dados.nome, dados.quantidade, dados.cor, dados.voltagem, dados.descricao, dados.categoria_id]
+                $6,
+                $7
+                )`, [dados.nome, dados.quantidade, dados.cor, dados.voltagem, dados.descricao, dados.categoria_id, dados.preco]
             )
 
             console.log(dados)
